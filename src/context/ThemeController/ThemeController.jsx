@@ -1,26 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../ThemeProvider";
 
 const ThemeController = () => {
-  const [theme, setTheme] = useState("myLightTheme");
-  const [toggleIcon, setToggleIcon] = useState(true);
-
-  useEffect(() => {
-    const currentTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", currentTheme);
-  }, [theme]);
-
-  const handleTheme = (e) => {
-    if (e.target.checked) {
-      localStorage.setItem("theme", "myDarkTheme");
-      setTheme("myDarkTheme");
-      setToggleIcon(!toggleIcon);
-      return;
-    }
-
-    localStorage.setItem("theme", "myLightTheme");
-    setTheme("myLightTheme");
-    setToggleIcon(!toggleIcon);
-  };
+  const { handleTheme, toggleTheme } = useContext(ThemeContext);
 
   const dark = (
     <svg
@@ -43,10 +25,11 @@ const ThemeController = () => {
   );
 
   return (
-    <div className="flex items-center h-screen z-50">
-      <label onChange={handleTheme} className="swap swap-rotate">
+    <div className="flex fixed top-[3%] items-center h-screen z-50">
+      <label onChange={(e) => handleTheme(e)} className="swap swap-rotate">
         <input type="checkbox" className="theme-controller" />
-        {toggleIcon ? "dark" : "light"}
+        {toggleTheme === "light" && "dark"}
+        {toggleTheme === "dark" && "light"}
       </label>
     </div>
   );

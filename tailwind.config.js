@@ -9,9 +9,9 @@ export default {
 
       {
         myDarkTheme: {
-          primary: "#0000ff",
+          primary: "#ff1949",
 
-          "primary-content": "#c6dbff",
+          "primary-content": "#fff",
 
           secondary: "#3800ff",
 
@@ -25,13 +25,13 @@ export default {
 
           "neutral-content": "#c4c4c4",
 
-          "base-100": "#202e32",
+          "base-100": "#000000",
 
           "base-200": "#1a272a",
 
           "base-300": "#151f22",
 
-          "base-content": "#ced1d2",
+          "base-content": "#fff",
 
           info: "#00a9e5",
 
@@ -54,9 +54,9 @@ export default {
       // light
       {
         myLightTheme: {
-          primary: "#003aff",
+          primary: "#ff1949",
 
-          "primary-content": "#cbdeff",
+          "primary-content": "#fff",
 
           secondary: "#a27e00",
 
@@ -70,13 +70,13 @@ export default {
 
           "neutral-content": "#d0cfd5",
 
-          "base-100": "#fffdfa",
+          "base-100": "#FFFFFF",
 
           "base-200": "#dedcd9",
 
           "base-300": "#bebcba",
 
-          "base-content": "#161615",
+          "base-content": "#252525",
 
           info: "#0074d2",
 

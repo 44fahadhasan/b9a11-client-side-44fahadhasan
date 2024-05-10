@@ -1,11 +1,8 @@
-import NavBar from "../../shared/NabBar/NavBar";
-import ThemeController from "../ThemeController/ThemeController";
-
+import Hero from "../Hero/Hero";
 const Home = () => {
   return (
     <div>
-      <NavBar />
-      <ThemeController />
+      <Hero />
     </div>
   );
 };
