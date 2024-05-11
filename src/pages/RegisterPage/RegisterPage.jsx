@@ -110,7 +110,9 @@ const RegisterPage = () => {
                       <Link to="/Login">
                         <p className="text-center text-sm font-light">
                           Already registered?{" "}
-                          <span className="underline ">Login</span>
+                          <span className="underline hover:text-[#FF1949]">
+                            Login
+                          </span>
                         </p>
                       </Link>
                     </div>
@@ -238,7 +240,7 @@ const RegisterPage = () => {
                     </div>
                   </form>
 
-                  <div className="my-12 border-b text-center">
+                  <div className="mt-5 mb-11 border-b text-center">
                     <div className="leading-none px-2 inline-block text-sm text-base-content tracking-wide font-medium bg-base-100 transform translate-y-1/2">
                       Or
                     </div>
