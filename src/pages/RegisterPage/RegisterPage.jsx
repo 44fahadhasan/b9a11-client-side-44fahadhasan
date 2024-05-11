@@ -249,7 +249,7 @@ const RegisterPage = () => {
                       onClick={() => handleSocialLogin(loginWithGoogle)}
                       className="w-full font-medium border shadow-sm rounded-lg py-3 bg-base-100 text-base-content flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                     >
-                      <div className="bg-base-100 p-2 rounded-full">
+                      <div className="bg-base-100 p-0 rounded-full">
                         <svg className="w-4" viewBox="0 0 533.5 544.3">
                           <path
                             d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
@@ -276,7 +276,7 @@ const RegisterPage = () => {
                       onClick={() => handleSocialLogin(loginWithGithub)}
                       className="w-full font-medium border shadow-sm rounded-lg py-3 bg-base-100 text-base-content flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5"
                     >
-                      <div className="bg-base-100 p-2 rounded-full">
+                      <div className="bg-base-100 p-0 rounded-full">
                         <svg
                           className="w-6 bg-white rounded-full"
                           viewBox="0 0 32 32"

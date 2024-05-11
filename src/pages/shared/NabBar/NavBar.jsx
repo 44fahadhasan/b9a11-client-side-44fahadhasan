@@ -1,8 +1,10 @@
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import logoBlack from "../../../assets/images/black-logo.png";
 import logo from "../../../assets/images/logo.png";
 import { ThemeContext } from "../../../context/ThemeProvider";
+import useAuth from "../../../hooks/useAuth";
 
 const menuItems = (
   <>
@@ -41,6 +43,19 @@ const menuItems = (
 
 const NavBar = () => {
   const { handleTheme, toggleTheme } = useContext(ThemeContext);
+
+  const { userLogOut, user } = useAuth();
+
+  // handle user logout
+  const handleLogOut = () => {
+    userLogOut()
+      .then(() => {
+        toast.success("successfully Logout");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="poppins navbar bg-base-100 w-[95%] lg:w-auto mx-auto container">
@@ -136,38 +151,46 @@ const NavBar = () => {
           </svg>
         </label>
 
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
-            </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-medium text-base"
-          >
-            <li>
-              <NavLink
-                to="My-Attempted-Assignments"
-                className={({ isActive }) =>
-                  isActive ? "text-primary" : "text-base-content"
-                }
+        <>
+          {user && (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
               >
-                My Attempted Assignments
-              </NavLink>
-            </li>
-            <li>
-              <button>Logout</button>
-            </li>
-          </ul>
-        </div>
+                <div className="w-10 rounded-full">
+                  <img
+                    className="object-cover"
+                    alt="user img"
+                    src={
+                      user?.photoURL ??
+                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    }
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-medium text-base"
+              >
+                <li>
+                  <NavLink
+                    to="My-Attempted-Assignments"
+                    className={({ isActive }) =>
+                      isActive ? "text-primary" : "text-base-content"
+                    }
+                  >
+                    My Attempted Assignments
+                  </NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogOut}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </>
       </div>
     </div>
   );
