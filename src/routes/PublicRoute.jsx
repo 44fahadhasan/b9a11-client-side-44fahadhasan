@@ -5,8 +5,10 @@ import CreateAssignmentsPage from "../pages/CreateAssignmentsPage/CreateAssignme
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/HomePage/Home/Home";
 import LoginPage from "../pages/LoginPage/LoginPage";
+import MyAttemptedAssignmentsPage from "../pages/MyAttemptedAssignmentsPage/MyAttemptedAssignmentsPage";
 import PendingAssignmentsPage from "../pages/PendingAssignmentsPage/PendingAssignmentsPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -32,15 +34,27 @@ const routes = createBrowserRouter([
       },
       {
         path: "Create-Assignments",
-        element: <CreateAssignmentsPage />,
+        element: (
+          <PrivateRoute>
+            <CreateAssignmentsPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "Pending-Assignments",
-        element: <PendingAssignmentsPage />,
+        element: (
+          <PrivateRoute>
+            <PendingAssignmentsPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "My-Attempted-Assignments",
-        element: <PendingAssignmentsPage />,
+        element: (
+          <PrivateRoute>
+            <MyAttemptedAssignmentsPage />
+          </PrivateRoute>
+        ),
       },
     ],
   },

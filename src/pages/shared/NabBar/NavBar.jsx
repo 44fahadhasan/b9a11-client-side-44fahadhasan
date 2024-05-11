@@ -6,45 +6,49 @@ import logo from "../../../assets/images/logo.png";
 import { ThemeContext } from "../../../context/ThemeProvider";
 import useAuth from "../../../hooks/useAuth";
 
-const menuItems = (
-  <>
-    <li>
-      <NavLink
-        to="Assignments"
-        className={({ isActive }) =>
-          isActive ? "text-primary" : "text-base-content"
-        }
-      >
-        Assignments
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="Create-Assignments"
-        className={({ isActive }) =>
-          isActive ? "text-primary" : "text-base-content"
-        }
-      >
-        Create Assignments
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="Pending-Assignments"
-        className={({ isActive }) =>
-          isActive ? "text-primary" : "text-base-content"
-        }
-      >
-        Pending Assignments
-      </NavLink>
-    </li>
-  </>
-);
-
 const NavBar = () => {
   const { handleTheme, toggleTheme } = useContext(ThemeContext);
 
   const { userLogOut, user } = useAuth();
+
+  const menuItems = (
+    <>
+      <li>
+        <NavLink
+          to="Assignments"
+          className={({ isActive }) =>
+            isActive ? "text-primary" : "text-base-content"
+          }
+        >
+          Assignments
+        </NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="Create-Assignments"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "text-base-content"
+              }
+            >
+              Create Assignments
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="Pending-Assignments"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "text-base-content"
+              }
+            >
+              Pending Assignments
+            </NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
 
   // handle user logout
   const handleLogOut = () => {
