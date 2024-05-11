@@ -73,15 +73,13 @@ const NavBar = () => {
             {menuItems}
           </ul>
         </div>
-        <a href="">
-          <div className="flex items-center ">
-            <Link to="/" className="">
-              {(toggleTheme && <img src={logoBlack} alt="logo" />) || (
-                <img src={logo} alt="logo" />
-              )}
-            </Link>
-          </div>
-        </a>
+        <div className="flex items-center ">
+          <Link to="/" className="">
+            {(toggleTheme && <img src={logoBlack} alt="logo" />) || (
+              <img src={logo} alt="logo" />
+            )}
+          </Link>
+        </div>
       </div>
 
       <div className="navbar-center hidden lg:flex">
