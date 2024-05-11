@@ -27,9 +27,9 @@ export default {
 
           "base-100": "#000000",
 
-          "base-200": "#1a272a",
+          "base-200": "#0e0e0e",
 
-          "base-300": "#151f22",
+          "base-300": "#191a1d",
 
           "base-content": "#fff",
 
@@ -72,9 +72,9 @@ export default {
 
           "base-100": "#FFFFFF",
 
-          "base-200": "#dedcd9",
+          "base-200": "#F3F4F6",
 
-          "base-300": "#bebcba",
+          "base-300": "#FFECF0",
 
           "base-content": "#252525",
 
