@@ -2,29 +2,35 @@ import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosURL from "../../hooks/useAxiosURL";
 import SectionContent from "../shared/SectionContent/SectionContent";
+import Tost from "../shared/Tost/Tost";
 
 const CreateAssignmentsPage = () => {
   const [startDate, setStartDate] = useState(new Date().toLocaleDateString());
 
   const { user } = useAuth();
+  const axiosOpenURL = useAxiosURL();
 
   const {
     register,
     handleSubmit,
+    resetField,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    const title = data.title;
-    const description = data.description;
-    const marks = data.marks;
-    const thumbnailImageUrl = data.thumbnailImageUrl;
-    const level = data.assignmentDifficultylevel;
+    const title = data?.title;
+    const description = data?.description;
+    const marks = data?.marks;
+    const thumbnailImageUrl = data?.thumbnailImageUrl;
+    const level = data?.assignmentDifficultylevel;
     const dueDate = startDate;
     const status = "pending";
-    const creatorEmail = user.email;
+    const creatorEmail = user?.email;
 
     const newAssignment = {
       title,
@@ -37,11 +43,37 @@ const CreateAssignmentsPage = () => {
       creatorEmail,
     };
 
-    console.log(newAssignment);
+    axiosOpenURL
+      .post("/assignments", newAssignment)
+      .then((response) => {
+        if (response?.data?.acknowledged) {
+          Swal.fire({
+            title: "Success!",
+            text: "Assignment created successfully",
+            icon: "success",
+            confirmButtonText: "Done",
+            confirmButtonColor: "#6fbe00",
+          });
+
+          // clear from filed
+          resetField("title");
+          resetField("description");
+          resetField("marks");
+          resetField("thumbnailImageUrl");
+          resetField("level");
+          resetField("dueDate");
+          resetField("status");
+          resetField("creatorEmail");
+        }
+      })
+      .catch((error) => {
+        toast.error(error?.message);
+      });
   };
 
   return (
     <section className="py-[70px] container w-[87%] mx-auto">
+      <Tost />
       <div>
         <SectionContent
           title="Craft New Assignments"
@@ -150,7 +182,7 @@ const CreateAssignmentsPage = () => {
               <label className="text-sm px-1 text-base-content font-medium">
                 Due Date:
               </label>
-              <div className="w-full pl-10 pr-3 py-2 rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100">
+              <div className="w-full pl-10 pr-3 py-[2px] rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100">
                 <ReactDatePicker
                   showIcon
                   selected={startDate}
@@ -195,7 +227,5 @@ const CreateAssignmentsPage = () => {
     </section>
   );
 };
-
-CreateAssignmentsPage.propTypes = {};
 
 export default CreateAssignmentsPage;
