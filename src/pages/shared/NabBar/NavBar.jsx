@@ -27,12 +27,12 @@ const NavBar = () => {
         <>
           <li>
             <NavLink
-              to="Create-Assignments"
+              to="Create-Assignment"
               className={({ isActive }) =>
                 isActive ? "text-primary" : "text-base-content"
               }
             >
-              Create Assignments
+              Create Assignment
             </NavLink>
           </li>
           <li>

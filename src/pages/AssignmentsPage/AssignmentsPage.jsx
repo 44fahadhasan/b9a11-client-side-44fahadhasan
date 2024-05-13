@@ -66,7 +66,8 @@ const AssignmentsPage = () => {
         <Tost />
         <div>
           <SectionContent
-            title="Get ready to dive into assignments!"
+            topContent="available all Assignment here"
+            title="Get ready to dive into assignment"
             bottomContent="This page is your hub for all upcoming tasks, due dates, and important information. Stay focused, stay organized, and ace your assignments"
           />
         </div>

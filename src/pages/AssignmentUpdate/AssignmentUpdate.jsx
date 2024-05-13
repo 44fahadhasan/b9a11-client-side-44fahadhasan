@@ -3,21 +3,23 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
 import useAxiosURL from "../../hooks/useAxiosURL";
 import SectionContent from "../shared/SectionContent/SectionContent";
 import Tost from "../shared/Tost/Tost";
 
-const CreateAssignmentsPage = () => {
+const AssignmentUpdate = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const { user } = useAuth();
+
   const axiosOpenURL = useAxiosURL();
+
+  const { _id, title, description, marks, thumbnailImageUrl, level, dueDate } =
+    useLoaderData() || {};
 
   const {
     register,
     handleSubmit,
-    resetField,
     formState: { errors },
   } = useForm();
 
@@ -28,41 +30,27 @@ const CreateAssignmentsPage = () => {
     const thumbnailImageUrl = data?.thumbnailImageUrl;
     const level = data?.assignmentDifficultylevel;
     const dueDate = startDate;
-    const status = "pending";
-    const creatorEmail = user?.email;
 
-    const newAssignment = {
+    const udatedAssignment = {
       title,
       description,
       marks,
       thumbnailImageUrl,
       level,
       dueDate,
-      status,
-      creatorEmail,
     };
 
     axiosOpenURL
-      .post("/assignments", newAssignment)
+      .patch(`/assignment/${_id}`, udatedAssignment)
       .then((response) => {
         if (response?.data?.acknowledged) {
           Swal.fire({
             title: "Success!",
-            text: "Assignment created successfully",
+            text: "Assignment updated successfully",
             icon: "success",
             confirmButtonText: "Done",
             confirmButtonColor: "#6fbe00",
           });
-
-          // clear from filed
-          resetField("title");
-          resetField("description");
-          resetField("marks");
-          resetField("thumbnailImageUrl");
-          resetField("level");
-          resetField("dueDate");
-          resetField("status");
-          resetField("creatorEmail");
         }
       })
       .catch((error) => {
@@ -75,8 +63,8 @@ const CreateAssignmentsPage = () => {
       <Tost />
       <div>
         <SectionContent
-          title="Craft New Assignment"
-          bottomContent="Utilize our streamlined interface to design engaging and informative assignments tailored to your  requirements. "
+          topContent="Welcome to Assignment update!"
+          title="Update Assignment"
         />
       </div>
       <div className="w-full mt-[70px] shadow-sm mx-auto md:w-[90%] lg:w-[80%] xl:w-[65%] border rounded-md py-10 px-5 md:px-10">
@@ -86,6 +74,7 @@ const CreateAssignmentsPage = () => {
               Title:
             </label>
             <input
+              defaultValue={title}
               type="text"
               name="title"
               placeholder="Title"
@@ -112,6 +101,7 @@ const CreateAssignmentsPage = () => {
                 Thumbnail Image URL:
               </label>
               <input
+                defaultValue={thumbnailImageUrl}
                 type="url"
                 name="thumbnailImageUrl"
                 placeholder="Thumbnail image url"
@@ -124,6 +114,7 @@ const CreateAssignmentsPage = () => {
                 Marks:
               </label>
               <input
+                defaultValue={marks}
                 type="number"
                 name="marks"
                 placeholder="Mark's"
@@ -157,11 +148,11 @@ const CreateAssignmentsPage = () => {
                 Difficulty Level:
               </label>
               <select
+                defaultValue={level}
                 name="assignmentDifficultylevel"
                 {...register("assignmentDifficultylevel", { required: true })}
                 className="w-full pl-10 pr-3 py-2 rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100"
               >
-                <option selected disabled></option>
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>
@@ -180,8 +171,8 @@ const CreateAssignmentsPage = () => {
               <div className="w-full pl-10 pr-3 py-[2px] rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100">
                 <ReactDatePicker
                   showIcon
-                  selected={startDate}
                   closeOnScroll={true}
+                  selected={dueDate}
                   onChange={(date) => setStartDate(date)}
                   toggleCalendarOnIconClick
                   className="bg-base-100 border-none outline-none"
@@ -195,6 +186,7 @@ const CreateAssignmentsPage = () => {
               Description:
             </label>
             <textarea
+              defaultValue={description}
               rows={5}
               placeholder="Description"
               name="description"
@@ -216,7 +208,7 @@ const CreateAssignmentsPage = () => {
           </div>
           <div className="flex justify-center">
             <button type="submit" className="btn btn-primary">
-              Create Assignment
+              Update Assignment
             </button>
           </div>
         </form>
@@ -225,4 +217,4 @@ const CreateAssignmentsPage = () => {
   );
 };
 
-export default CreateAssignmentsPage;
+export default AssignmentUpdate;

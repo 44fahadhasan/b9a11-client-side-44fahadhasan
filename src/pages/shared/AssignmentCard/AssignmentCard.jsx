@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { GrView } from "react-icons/gr";
 import { MdDateRange, MdDeleteForever, MdEditSquare } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const AssignmentCard = ({
   assignment: {
@@ -54,9 +55,12 @@ const AssignmentCard = ({
           </button>
 
           {/* update */}
-          <button className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white">
+          <Link
+            to={`/Update/${_id}`}
+            className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
+          >
             <MdEditSquare className="h-5 w-5" />
-          </button>
+          </Link>
 
           {/* view */}
           <button className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white">
