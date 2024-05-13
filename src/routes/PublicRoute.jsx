@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/Root";
+import AssignmentDetailsPage from "../pages/AssignmentDetailsPage/AssignmentDetailsPage";
 import AssignmentUpdate from "../pages/AssignmentUpdate/AssignmentUpdate";
 import AssignmentsPage from "../pages/AssignmentsPage/AssignmentsPage";
 import CreateAssignmentsPage from "../pages/CreateAssignmentsPage/CreateAssignmentsPage";
@@ -64,6 +65,16 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AssignmentUpdate />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "Assignment-Details/:id",
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/assignment/${params?.id}`),
+        element: (
+          <PrivateRoute>
+            <AssignmentDetailsPage />
           </PrivateRoute>
         ),
       },

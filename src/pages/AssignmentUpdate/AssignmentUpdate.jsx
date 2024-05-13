@@ -3,7 +3,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosURL from "../../hooks/useAxiosURL";
 import SectionContent from "../shared/SectionContent/SectionContent";
@@ -13,6 +13,7 @@ const AssignmentUpdate = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const axiosOpenURL = useAxiosURL();
+  const navigate = useNavigate();
 
   const { _id, title, description, marks, thumbnailImageUrl, level, dueDate } =
     useLoaderData() || {};
@@ -51,6 +52,9 @@ const AssignmentUpdate = () => {
             confirmButtonText: "Done",
             confirmButtonColor: "#6fbe00",
           });
+
+          // redirect to assignments page
+          navigate("/Assignments");
         }
       })
       .catch((error) => {

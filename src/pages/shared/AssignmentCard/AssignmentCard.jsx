@@ -61,11 +61,15 @@ const AssignmentCard = ({
           >
             <MdEditSquare className="h-5 w-5" />
           </Link>
+          {/*  */}
 
           {/* view */}
-          <button className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white">
+          <Link
+            to={`/Assignment-Details/${_id}`}
+            className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
+          >
             <GrView className="h-5 w-5" />
-          </button>
+          </Link>
         </div>
       </div>
 
