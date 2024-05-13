@@ -10,8 +10,7 @@ import SectionContent from "../shared/SectionContent/SectionContent";
 import Tost from "../shared/Tost/Tost";
 
 const CreateAssignmentsPage = () => {
-  const [startDate, setStartDate] = useState(new Date().toLocaleDateString());
-
+  const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const axiosOpenURL = useAxiosURL();
 
@@ -116,14 +115,9 @@ const CreateAssignmentsPage = () => {
                 type="url"
                 name="thumbnailImageUrl"
                 placeholder="Thumbnail image url"
-                {...register("thumbnailImageUrl", { required: true })}
+                {...register("thumbnailImageUrl")}
                 className="w-full pl-10 pr-3 py-2 rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100"
               />
-              {errors.thumbnailImageUrl && (
-                <span className="text-base-content text-xs">
-                  Thumbnail image url can&apos;t be empty
-                </span>
-              )}
             </div>
             <div className="space-y-1 text-base w-full">
               <label className="text-sm px-1 text-base-content font-medium">
@@ -167,6 +161,7 @@ const CreateAssignmentsPage = () => {
                 {...register("assignmentDifficultylevel", { required: true })}
                 className="w-full pl-10 pr-3 py-2 rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100"
               >
+                <option selected disabled></option>
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>

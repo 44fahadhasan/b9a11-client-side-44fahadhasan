@@ -12,6 +12,7 @@ const AssignmentCard = ({
     level,
     dueDate,
   } = {},
+  handleDelete,
 }) => {
   return (
     <article className="mb-4 group overflow-hidden rounded-xl border shadow-md duration-500 ease-in-out hover:shadow-xl">
@@ -20,9 +21,9 @@ const AssignmentCard = ({
         {/* img */}
         <div>
           <img
-            className="w-full object-cover"
+            className="w-full object-cover h-[233px]"
             src={
-              thumbnailImageUrl &&
+              thumbnailImageUrl ||
               "https://i.ibb.co/0ckKbwn/240-F-309598037-Frf-MLAf-TQrsts-Vg5-SZMa-GH1-Uef6s69-EB.jpg"
             }
           />
@@ -44,12 +45,20 @@ const AssignmentCard = ({
 
         {/* delete,update,view button */}
         <div className="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
-          <button className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white">
+          {/* delete */}
+          <button
+            onClick={() => handleDelete(_id)}
+            className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
+          >
             <MdDeleteForever className="h-6 w-6" />
           </button>
+
+          {/* update */}
           <button className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white">
             <MdEditSquare className="h-5 w-5" />
           </button>
+
+          {/* view */}
           <button className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white">
             <GrView className="h-5 w-5" />
           </button>
@@ -82,6 +91,7 @@ const AssignmentCard = ({
 
 AssignmentCard.propTypes = {
   assignment: PropTypes.object,
+  handleDelete: PropTypes.func,
 };
 
 export default AssignmentCard;
