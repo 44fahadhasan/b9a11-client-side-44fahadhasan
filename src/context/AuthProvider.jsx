@@ -11,6 +11,7 @@ import {
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import useAxiousSecureURL from "../hooks/useAxiousSecureURL";
 
 // context
 export const AuthContext = createContext(null);
@@ -18,6 +19,9 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // axios secure url
+  const axiosSecureURL = useAxiousSecureURL();
 
   const githubProvider = new GithubAuthProvider();
   const googlProvider = new GoogleAuthProvider();
@@ -59,18 +63,45 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
+
       if (currentUser) {
-        // login
+        // user login success
         setUser(currentUser);
+
+        const activeUserEmail = { email: currentUser?.email };
+
+        // jwt token http request start
+        axiosSecureURL
+          .post("/jwtToken", activeUserEmail)
+          .then((response) => {
+            console.log(response?.data);
+          })
+          .catch((error) => {
+            console.log(error?.message);
+          });
+
+        // jwt token http request end
       } else {
-        // logout
+        // user logout success
         setUser(null);
+
+        // jwt token http request start
+        axiosSecureURL
+          .get("/logout")
+          .then((response) => {
+            console.log(response?.data);
+          })
+          .catch((error) => {
+            console.log(error?.message);
+          });
+
+        // jwt token http request end
       }
     });
 
-    // clean up
+    // clean up firebase observer mathod
     return () => unSubscribe();
-  }, []);
+  }, [axiosSecureURL]);
 
   console.log("active user:", user);
 
