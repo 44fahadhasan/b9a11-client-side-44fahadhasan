@@ -24,6 +24,7 @@ const AssignmentDetailsPage = () => {
     const quickNode = data?.quickNode;
     const assignmentStatus = "pending";
     const submittedUserEmail = user?.email;
+    const examineeName = user?.displayName;
     const assignmentMarks = marks;
     const assignmentTitle = title;
 
@@ -34,6 +35,7 @@ const AssignmentDetailsPage = () => {
       submittedUserEmail,
       assignmentTitle,
       assignmentMarks,
+      examineeName,
     };
 
     axiosOpenURL

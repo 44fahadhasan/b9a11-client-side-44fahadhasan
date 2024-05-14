@@ -25,8 +25,6 @@ const MyAttemptedAssignmentsPage = () => {
       });
   }, [axiosSecureURL, email]);
 
-  console.log(submittedAssignments);
-
   return (
     <section className="poppins bg-base-100 py-[70px]">
       <div className="container w-[87%] mx-auto">

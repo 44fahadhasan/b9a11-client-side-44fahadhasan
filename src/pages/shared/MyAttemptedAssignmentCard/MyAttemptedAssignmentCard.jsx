@@ -38,7 +38,8 @@ const MyAttemptedAssignmentCard = ({
 
         {obtainedMarks && (
           <p className="mt-4 text-3xl font-medium">
-            0 <span className="text-base font-normal">/Obtained marks</span>
+            {obtainedMarks}{" "}
+            <span className="text-base font-normal">/Obtained marks</span>
           </p>
         )}
 
@@ -48,17 +49,19 @@ const MyAttemptedAssignmentCard = ({
           {assignmentTitle}
         </p>
 
-        <div className="mt-2">
-          <ul className="grid grid-cols-1 gap-4">
-            <li className="inline-flex items-center text-primary gap-1 font-medium">
-              <BiSolidCommentDetail />
-              Feedback:{" "}
-              <span className="text-base-content text-sm font-medium opensans">
-                {(feedback && { feedback }) || "No feedback here"}
-              </span>
-            </li>
-          </ul>
-        </div>
+        {feedback && (
+          <div className="mt-2">
+            <ul className="grid grid-cols-1 gap-4">
+              <li className="inline-flex items-center text-primary gap-1 font-medium">
+                <BiSolidCommentDetail />
+                feedback:{" "}
+                <span className="text-base-content text-sm font-medium opensans">
+                  {feedback}
+                </span>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

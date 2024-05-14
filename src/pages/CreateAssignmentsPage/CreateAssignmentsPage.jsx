@@ -4,14 +4,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-// import useAuth from "../../hooks/useAuth";
 import useAxiosURL from "../../hooks/useAxiosURL";
 import SectionContent from "../shared/SectionContent/SectionContent";
 import Tost from "../shared/Tost/Tost";
 
 const CreateAssignmentsPage = () => {
   const [startDate, setStartDate] = useState(new Date());
-  // const { user } = useAuth();
+
   const axiosOpenURL = useAxiosURL();
 
   const {
@@ -28,8 +27,6 @@ const CreateAssignmentsPage = () => {
     const thumbnailImageUrl = data?.thumbnailImageUrl;
     const level = data?.assignmentDifficultylevel;
     const dueDate = startDate;
-    // const status = "pending";
-    // const creatorEmail = user?.email;
 
     const newAssignment = {
       title,
@@ -38,8 +35,6 @@ const CreateAssignmentsPage = () => {
       thumbnailImageUrl,
       level,
       dueDate,
-      // status,
-      // creatorEmail,
     };
 
     axiosOpenURL
