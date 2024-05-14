@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import { BiSolidCommentDetail } from "react-icons/bi";
+import Iframe from "react-iframe";
 
 const MyAttemptedAssignmentCard = ({
   assignment: {
+    fdfDocLink,
     assignmentStatus,
     assignmentTitle,
     assignmentMarks,
@@ -13,6 +15,15 @@ const MyAttemptedAssignmentCard = ({
   return (
     <section className="text-center transform duration-500 hover:-translate-y-2 ">
       <div className="shadow p-5 rounded-lg border-t-4 border-[#0EB582] hover:border-primary transition-all ease-in-out duration-500  bg-base-300">
+        <div className="mb-10 rounded-md bg-base-200">
+          <Iframe
+            url={fdfDocLink}
+            className="w-full h-80 rounded-md"
+            display="block"
+            position="relative"
+          />
+        </div>
+
         <p className="font-medium text-primary">
           Status:{" "}
           <span className="text-base-content text-sm opensans">
