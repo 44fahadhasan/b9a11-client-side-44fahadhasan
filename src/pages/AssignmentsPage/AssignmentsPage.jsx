@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAxiosURL from "../../hooks/useAxiosURL";
@@ -8,8 +9,35 @@ import Tost from "../shared/Tost/Tost";
 
 const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState([]);
+  const [filter, setFilter] = useState("");
 
   const axiosOpenURL = useAxiosURL();
+  const { register, handleSubmit } = useForm();
+
+  useEffect(() => {
+    if (filter === "All") {
+      axiosOpenURL
+        .get("/assignments")
+        .then((response) => {
+          setAssignments(response?.data);
+        })
+        .catch((error) => {
+          console.error(error?.message);
+        });
+      return;
+    }
+
+    axiosOpenURL
+      .get(`/queryAssignments?level=${filter}`)
+      .then((response) => {
+        setAssignments(response?.data);
+      })
+      .catch((error) => {
+        console.error(error?.message);
+      });
+  }, [axiosOpenURL, filter]);
+
+  //
 
   useEffect(() => {
     axiosOpenURL
@@ -60,6 +88,12 @@ const AssignmentsPage = () => {
     });
   };
 
+  // handle filter by level
+  const onSubmit = (data) => {
+    const level = data?.assignmentDifficultylevel;
+    setFilter(level);
+  };
+
   return (
     <section className="poppins flex flex-col items-center bg-base-100 py-[70px]">
       <div className="container w-[87%] mx-auto">
@@ -70,6 +104,28 @@ const AssignmentsPage = () => {
             title="Get ready to dive into assignment"
             bottomContent="This page is your hub for all upcoming tasks, due dates, and important information. Stay focused, stay organized, and ace your assignments"
           />
+        </div>
+
+        <div className="flex flex-col mt-10">
+          <form onChange={handleSubmit(onSubmit)}>
+            <div className="flex justify-center">
+              <div className="w-80">
+                <select
+                  name="assignmentDifficultylevel"
+                  {...register("assignmentDifficultylevel")}
+                  className="w-full pl-10 pr-3 py-2 rounded-lg border border-[#E9E9E9] text-secondary-content outline-none focus:border-primary bg-base-100"
+                >
+                  <option disabled selected>
+                    Filter By Level
+                  </option>
+                  <option value="All">All</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Hard">Hard</option>
+                </select>
+              </div>
+            </div>
+          </form>
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
