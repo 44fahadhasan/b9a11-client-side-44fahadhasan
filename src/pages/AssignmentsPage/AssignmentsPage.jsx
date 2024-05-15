@@ -15,8 +15,12 @@ const AssignmentsPage = () => {
   const [activePageNumber, setActivePageNumber] = useState(0);
   const [totalAssignmentNumber, setTotalAssignmentNumber] = useState(0);
 
-  const parPageAssignment = 6;
-  const numberOfPage = Math.ceil(totalAssignmentNumber / parPageAssignment);
+  const parPageAssignment = 1;
+
+  let numberOfPage;
+  if (totalAssignmentNumber > 0) {
+    numberOfPage = Math.round(totalAssignmentNumber / parPageAssignment);
+  }
 
   const pagesNumber = [];
   for (let i = 0; i < numberOfPage; i++) {
@@ -41,7 +45,18 @@ const AssignmentsPage = () => {
 
   useEffect(() => {
     axiosOpenURL
-      .get(`countAssignment`)
+      .get(`countAssignment?level=${filter}`)
+      .then((response) => {
+        setTotalAssignmentNumber(response?.data?.totalAssignmentNumber);
+      })
+      .catch((error) => {
+        console.error(error?.message);
+      });
+  }, [axiosOpenURL, filter]);
+
+  useEffect(() => {
+    axiosOpenURL
+      .get("countAssignment")
       .then((response) => {
         setTotalAssignmentNumber(response?.data?.totalAssignmentNumber);
       })
