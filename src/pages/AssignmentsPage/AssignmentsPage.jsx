@@ -172,6 +172,7 @@ const AssignmentsPage = () => {
               key={assignment?._id}
               assignment={assignment}
               handleDelete={handleDelete}
+              isShow={true}
             />
           ))}
         </div>

@@ -14,6 +14,7 @@ const AssignmentCard = ({
     dueDate,
   } = {},
   handleDelete,
+  isShow,
 }) => {
   return (
     <article className="mb-4 group overflow-hidden rounded-xl border shadow-md duration-500 ease-in-out hover:shadow-xl">
@@ -47,21 +48,24 @@ const AssignmentCard = ({
         {/* delete,update,view button */}
         <div className="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
           {/* delete */}
-          <button
-            onClick={() => handleDelete(_id)}
-            className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
-          >
-            <MdDeleteForever className="h-6 w-6" />
-          </button>
+          {isShow && (
+            <button
+              onClick={() => handleDelete(_id)}
+              className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
+            >
+              <MdDeleteForever className="h-6 w-6" />
+            </button>
+          )}
 
           {/* update */}
-          <Link
-            to={`/Update/${_id}`}
-            className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
-          >
-            <MdEditSquare className="h-5 w-5" />
-          </Link>
-          {/*  */}
+          {isShow && (
+            <Link
+              to={`/Update/${_id}`}
+              className="flex items-center justify-center h-10 w-10 bg-primary rounded-full text-white"
+            >
+              <MdEditSquare className="h-5 w-5" />
+            </Link>
+          )}
 
           {/* view */}
           <Link
@@ -100,6 +104,7 @@ const AssignmentCard = ({
 AssignmentCard.propTypes = {
   assignment: PropTypes.object,
   handleDelete: PropTypes.func,
+  isShow: PropTypes.bool,
 };
 
 export default AssignmentCard;
