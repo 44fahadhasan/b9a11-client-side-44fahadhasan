@@ -215,7 +215,7 @@ const AssignmentsPage = () => {
                     }`}
                     key={pageNumber}
                   >
-                    {pageNumber}
+                    {pageNumber + 1}
                   </button>
                 ))}
 
