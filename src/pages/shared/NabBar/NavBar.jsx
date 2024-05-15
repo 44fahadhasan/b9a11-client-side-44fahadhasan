@@ -5,11 +5,14 @@ import logoBlack from "../../../assets/images/black-logo.png";
 import logo from "../../../assets/images/logo.png";
 import { ThemeContext } from "../../../context/ThemeProvider";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosURL from "../../../hooks/useAxiosURL";
 
 const NavBar = () => {
   const { handleTheme, toggleTheme } = useContext(ThemeContext);
 
   const { userLogOut, user } = useAuth();
+
+  const axiosOpenURL = useAxiosURL();
 
   const menuItems = (
     <>
@@ -55,6 +58,19 @@ const NavBar = () => {
     userLogOut()
       .then(() => {
         toast.success("successfully Logout");
+
+        // jwt token http request start
+
+        axiosOpenURL
+          .get("/logout")
+          .then((response) => {
+            console.log(response?.data);
+          })
+          .catch((error) => {
+            console.log(error?.message);
+          });
+
+        // jwt token http request end
       })
       .catch((error) => {
         toast.error(error.message);

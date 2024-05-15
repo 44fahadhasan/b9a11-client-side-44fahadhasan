@@ -84,18 +84,6 @@ const AuthProvider = ({ children }) => {
       } else {
         // user logout success
         setUser(null);
-
-        // jwt token http request start
-        axiosSecureURL
-          .get("/logout")
-          .then((response) => {
-            console.log(response?.data);
-          })
-          .catch((error) => {
-            console.log(error?.message);
-          });
-
-        // jwt token http request end
       }
     });
 

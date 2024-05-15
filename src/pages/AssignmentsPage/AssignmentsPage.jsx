@@ -11,13 +11,49 @@ const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState([]);
   const [filter, setFilter] = useState("");
 
+  // pagination
+  const [activePageNumber, setActivePageNumber] = useState(0);
+  const [totalAssignmentNumber, setTotalAssignmentNumber] = useState(0);
+
+  const parPageAssignment = 6;
+  const numberOfPage = Math.ceil(totalAssignmentNumber / parPageAssignment);
+
+  const pagesNumber = [];
+  for (let i = 0; i < numberOfPage; i++) {
+    pagesNumber.push(i);
+  }
+
+  const handlePreviousPage = () => {
+    if (activePageNumber > 0) {
+      setActivePageNumber(activePageNumber - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (activePageNumber < pagesNumber.length - 1) {
+      setActivePageNumber(activePageNumber + 1);
+    }
+  };
+  // pagination
+
   const axiosOpenURL = useAxiosURL();
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
+    axiosOpenURL
+      .get(`countAssignment`)
+      .then((response) => {
+        setTotalAssignmentNumber(response?.data?.totalAssignmentNumber);
+      })
+      .catch((error) => {
+        console.error(error?.message);
+      });
+  }, [axiosOpenURL]);
+
+  useEffect(() => {
     if (filter === "All") {
       axiosOpenURL
-        .get("/assignments")
+        .get(`/assignments?page=${activePageNumber}&size=${parPageAssignment}`)
         .then((response) => {
           setAssignments(response?.data);
         })
@@ -28,27 +64,29 @@ const AssignmentsPage = () => {
     }
 
     axiosOpenURL
-      .get(`/queryAssignments?level=${filter}`)
+      .get(
+        `/queryAssignments?level=${filter}&page=${activePageNumber}&size=${parPageAssignment}`
+      )
       .then((response) => {
         setAssignments(response?.data);
       })
       .catch((error) => {
         console.error(error?.message);
       });
-  }, [axiosOpenURL, filter]);
+  }, [activePageNumber, axiosOpenURL, filter]);
 
   //
 
   useEffect(() => {
     axiosOpenURL
-      .get("/assignments")
+      .get(`/assignments?page=${activePageNumber}&size=${parPageAssignment}`)
       .then((response) => {
         setAssignments(response?.data);
       })
       .catch((error) => {
         console.error(error?.message);
       });
-  }, [axiosOpenURL]);
+  }, [activePageNumber, axiosOpenURL]);
 
   // handleDelete
   const handleDelete = (id) => {
@@ -136,6 +174,44 @@ const AssignmentsPage = () => {
               handleDelete={handleDelete}
             />
           ))}
+        </div>
+
+        {/* pagination */}
+        <div className="flex flex-col items-center mt-8">
+          <nav title="Page navigation example">
+            <div className="flex gap-3">
+              {/* previous button */}
+              <button
+                onClick={handlePreviousPage}
+                className="btn btn-sm active:bg-primary"
+                title="Previous"
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </button>
+
+              {/* pages number */}
+              {pagesNumber.map((pageNumber) => (
+                <button
+                  onClick={() => setActivePageNumber(pageNumber)}
+                  className={`btn btn-sm ${
+                    pageNumber === activePageNumber && "btn-primary"
+                  }`}
+                  key={pageNumber}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+
+              {/* next button */}
+              <button
+                onClick={handleNextPage}
+                className="btn btn-sm active:bg-primary"
+                title="Next"
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </div>
+          </nav>
         </div>
       </div>
     </section>
