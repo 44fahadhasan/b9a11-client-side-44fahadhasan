@@ -15,7 +15,7 @@ const AssignmentsPage = () => {
   const [activePageNumber, setActivePageNumber] = useState(0);
   const [totalAssignmentNumber, setTotalAssignmentNumber] = useState(0);
 
-  const parPageAssignment = 1;
+  const parPageAssignment = 6;
 
   let numberOfPage;
   if (totalAssignmentNumber > 0) {
