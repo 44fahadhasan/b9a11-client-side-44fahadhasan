@@ -91,8 +91,6 @@ const AuthProvider = ({ children }) => {
     return () => unSubscribe();
   }, [axiosSecureURL]);
 
-  console.log("active user:", user);
-
   const authInfo = {
     user,
     loading,

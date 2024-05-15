@@ -178,42 +178,44 @@ const AssignmentsPage = () => {
         </div>
 
         {/* pagination */}
-        <div className="flex flex-col items-center mt-8">
-          <nav title="Page navigation example">
-            <div className="flex gap-3">
-              {/* previous button */}
-              <button
-                onClick={handlePreviousPage}
-                className="btn btn-sm active:bg-primary"
-                title="Previous"
-              >
-                <span aria-hidden="true">&laquo;</span>
-              </button>
-
-              {/* pages number */}
-              {pagesNumber.map((pageNumber) => (
+        {assignments.length > 0 && (
+          <div className="flex flex-col items-center mt-8">
+            <nav title="Page navigation example">
+              <div className="flex gap-3">
+                {/* previous button */}
                 <button
-                  onClick={() => setActivePageNumber(pageNumber)}
-                  className={`btn btn-sm ${
-                    pageNumber === activePageNumber && "btn-primary"
-                  }`}
-                  key={pageNumber}
+                  onClick={handlePreviousPage}
+                  className="btn btn-sm active:bg-primary"
+                  title="Previous"
                 >
-                  {pageNumber}
+                  <span aria-hidden="true">&laquo;</span>
                 </button>
-              ))}
 
-              {/* next button */}
-              <button
-                onClick={handleNextPage}
-                className="btn btn-sm active:bg-primary"
-                title="Next"
-              >
-                <span aria-hidden="true">&raquo;</span>
-              </button>
-            </div>
-          </nav>
-        </div>
+                {/* pages number */}
+                {pagesNumber.map((pageNumber) => (
+                  <button
+                    onClick={() => setActivePageNumber(pageNumber)}
+                    className={`btn btn-sm ${
+                      pageNumber === activePageNumber && "btn-primary"
+                    }`}
+                    key={pageNumber}
+                  >
+                    {pageNumber}
+                  </button>
+                ))}
+
+                {/* next button */}
+                <button
+                  onClick={handleNextPage}
+                  className="btn btn-sm active:bg-primary"
+                  title="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
       </div>
     </section>
   );
