@@ -9,7 +9,7 @@ The Raque website is an educational platform designed to facilitate assignment m
 - **Attempt Tracking:** Users can monitor their attempts and view their scores for each assignment they engage with, facilitating progress tracking and skill enhancement.
 - **Light and Dark mode:** Toggle between light and dark mode for different viewing preferences.
 
- Technologies Used
+## Technologies Used
 - **Front-End:** React.js, Tailwind CSS
 - **Back-End:** Node.js, Express.js
 - **Database:** MongoDB
