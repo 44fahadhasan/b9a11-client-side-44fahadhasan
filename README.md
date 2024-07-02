@@ -1,9 +1,12 @@
-# Newspaper Website Project
+# Assignment Website Project
 
 ## Overview
-The newspaper website project provides a platform for both normal and premium users to access news articles. Users can subscribe to premium content using integrated payment methods. The admin dashboard facilitates user and content management, ensuring smooth operation.
+The Raque website is an educational platform designed to facilitate assignment management for users. It allows users to both take assignments to test their skills and create assignments for others to complete. The platform offers assignment variants categorized as easy, medium, and hard, providing users with diverse challenges to choose from. Users can track their attempts and view their scores for each assignment they complete, fostering skill development and progression.
 
 ## Key Features
+
+
+- **Assignment Management:** Users can take and create assignments.
 
 ### User Roles
 - **Normal Users:** Access to free news content.
