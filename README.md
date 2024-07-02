@@ -10,10 +10,10 @@ The Raque website is an educational platform designed to facilitate assignment m
 - **Light and Dark Mode:** Toggle between light and dark mode for different viewing preferences.
 
 ## Technologies Used
-- **Frontend:** React.js, Tailwind CSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Authentication:** Firebase 
+- ** Frontend: ** React.js, Tailwind CSS
+- ** Backend: ** Node.js, Express.js
+- ** Database: ** MongoDB
+- ** Authentication: ** Firebase 
 
 ## Getting Started
 
