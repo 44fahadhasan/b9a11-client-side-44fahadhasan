@@ -1,4 +1,4 @@
-# Assignment Website Project(Raque)
+# Assignments Website Project(Raque)
 
 ## Overview
 The Raque website is an educational platform designed to facilitate assignment management for users. It allows users to both take assignments to test their skills and create assignments for others to complete. The platform offers assignment variants categorized as easy, medium, and hard, providing users with diverse challenges to choose from. Users can track their attempts and view their scores for each assignment they complete, fostering skill development and progression.
