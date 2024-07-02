@@ -4,16 +4,16 @@
 The Raque website is an educational platform designed to facilitate assignment management for users. It allows users to both take assignments to test their skills and create assignments for others to complete. The platform offers assignment variants categorized as easy, medium, and hard, providing users with diverse challenges to choose from. Users can track their attempts and view their scores for each assignment they complete, fostering skill development and progression.
 
 ## Features
-- **Assignment Management: **Users can choose and attempt assignments available on the platform.
-- **Difficulty Levels: **Assignments are categorized into easy, medium, and hard variants, catering to different skill levels.
-- **Attempt Tracking: **Users can monitor their attempts and view their scores for each assignment they engage with, facilitating progress tracking and skill enhancement.
-- **Light and Dark Mode:** Toggle between light and dark mode for different viewing preferences.
+- Assignment Management: Users can choose and attempt assignments available on the platform.
+- Difficulty Levels: Assignments are categorized into easy, medium, and hard variants, catering to different skill levels.
+- Attempt Tracking: Users can monitor their attempts and view their scores for each assignment they engage with, facilitating progress tracking and skill enhancement.
+- Light and Dark ode: Toggle between light and dark mode for different viewing preferences.
 
-## Technologies Used
-- ** Frontend: ** React.js, Tailwind CSS
-- ** Backend: ** Node.js, Express.js
-- ** Database: ** MongoDB
-- ** Authentication: ** Firebase 
+ Technologies Used
+- Frontend: React.js, Tailwind CSS
+- Back: Node.js, Express.js
+- Database: MongoDB
+- Authentication: Firebase 
 
 ## Getting Started
 
